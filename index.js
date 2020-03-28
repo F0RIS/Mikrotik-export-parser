@@ -1,15 +1,10 @@
 var data = `
-add caller-id="" comment=0956365651 disabled=no limit-bytes-in=0 limit-bytes-out=0 name=Gorkogo18_33 password=7393620 profile=80m routes="" service=pppoe
-add caller-id="" disabled=no limit-bytes-in=0 limit-bytes-out=0 name=Gorkogo2342 password=68297 profile=30MB routes="" service=pppoe
-add caller-id="" disabled=no limit-bytes-in=0 limit-bytes-out=0 name=\
-    Gorkogo2722 password=14203 profile=60m routes="" service=pppoe
-add caller-id="" disabled=no limit-bytes-in=0 limit-bytes-out=0 name=\
-    Pushkinskaya297_59 password=58455 profile=80m routes="" service=pppoe
-add caller-id="" disabled=yes limit-bytes-in=0 limit-bytes-out=0 name=\
-    Leningradskaya29_52 password=8390510 profile=80m routes="" service=pppoe
-add caller-id="" comment=0501048586 disabled=no limit-bytes-in=0 \
-    limit-bytes-out=0 name=Gorkogo2316 password=23744 profile=20MB routes="" \
-    service=pppoe
+add caller-id="" comment="11 22 33" disabled=no limit-bytes-in=0 \
+    limit-bytes-out=0 name=Petrovskogo13_54 password=75746 profile=80m \
+    routes="" service=pppoe
+add caller-id="" comment=0506456035 disabled=no limit-bytes-in=0 \
+    limit-bytes-out=0 name=Pushkinskaya297_46 password=84179 profile=80m \
+    routes="" service=pppoe
 `;
 
 const NEEDED_FIELDS = {
@@ -19,6 +14,8 @@ const NEEDED_FIELDS = {
     comment: true,
 }
 
+const SEPARATOR = ",";
+
 class Record {
     constructor(line) {
         line = line.replace("    ", "");
@@ -27,6 +24,14 @@ class Record {
             const arr = attrs[i].split("=");
             var key = arr[0];
             var val = arr[1];
+            
+            if (val && val.charAt(0) == '"') { //value in quotes
+                while(attrs[i + 1].indexOf("=") == -1) {
+                    val += " " + attrs[i + 1];
+                    val = val.replace(/"+/g, "")
+                    i++;
+                }
+            }
             // console.log({key, val});
             if (NEEDED_FIELDS[key]) {
                 if (key == "disabled") {
@@ -38,7 +43,7 @@ class Record {
         }
     }
     toString() {
-        return [this.name, this.password, this.comment].join(" ");
+        return [this.name, this.password, this.comment].join(SEPARATOR);
     }
 }
 
