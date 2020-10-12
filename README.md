@@ -10,7 +10,7 @@
 2. Download `users.rsc` to local machine, open it with any text editor, copy all lines after `/ppp secret`
 
 3. Insert these lines inside index.js file, save it
-4. Oopen terminal in current folder and execute:
+4. Open terminal in current folder and execute:
 
 `node index.js >> file.csv`
 
