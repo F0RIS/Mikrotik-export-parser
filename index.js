@@ -42,8 +42,11 @@ class Record {
             }
         }
     }
-    toString() {
+    toCSV() {
         return [this.name, this.password, this.comment].join(SEPARATOR);
+    }
+    toSetCommentCommand() {
+        return `set ${this.name} comment=${this.comment}`;
     }
 }
 
@@ -57,8 +60,12 @@ function parse(data) {
         if (line.length != 0) {
             var rec = new Record(line);
             if (!rec.disabled) {
-                res.push(rec.toString())
+                res.push(rec.toCSV())
             }
+
+            // if (rec.comment) { //to create commands to update comments
+            //     res.push(rec.toSetCommentCommand())
+            // }
         }
     }
 
