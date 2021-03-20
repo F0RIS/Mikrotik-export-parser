@@ -1,4 +1,4 @@
-**Script to parse exported secrets and conver them to csv**
+**Script to parse exported secrets and convert them to csv**
 
 **You should have installed nodejs on your machine or you can execute it in browser debug console**
 
@@ -12,6 +12,10 @@
 3. Insert these lines inside index.js file, save it
 4. Open terminal in current folder and execute:
 
-`node index.js >> file.csv`
+`node index.js > file.csv`
 
-Now you can import that csv file to word, excel or anywhere you want
+## Additional
+
+You can change output format by changing `EXPORT_TYPE` to predefined values in `EExportType`
+
+Now you can import that csv file to word, excel, google contatcs or anywhere you want
